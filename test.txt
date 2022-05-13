@@ -1,0 +1,60 @@
+<<<<CREATE TABLE query test>>>>
+create table student(id int, name string);       # successful: create a table <student>
+create table student(id int, name string);       # error: the same name exists
+create table people();                           # error: no column, need at least one column
+create table people(name string, name string);   # error: columns are the same
+CREATE TABLE people(name string, age int);       # successful: keywords with uppercase works
+
+# USE [SHOW TABLES;] TO CHECK IF THE TABLES ARE SAVED!
+show tables;
+----------------------------------------------------------------------------------------------------------------------
+<<<<INSERT INTO query test>>>>
+insert into student values(1,'amy');
+insert into student values(2,'ray');
+insert into student values(3,'lily');
+insert into student values(4,'amy');
+insert into student(1);                           # Error: should have values for all columns
+insert into student('ben',5);                     # Error: should insert values to the table in the same order
+
+#Use [select * ] if the data are saved
+select * from student;
+----------------------------------------------------------------------------------------------------------------------
+<<<<SELECT COLUMN FROM TABLE query test>>>>
+select id from student;                            # show data for column "id"
+select name from student;                          # show data for column "name"
+select age from student;                           # Error: column "age" does not exist
+select id from list;                               # Error: the table "list" does not exist
+
+-----------------------------------------------------------------------------------------------------------------------
+<<<<SELECT * FROM TABLE query test>>>>
+select * from student;                             # show data for the whole table
+select * from people;                              # nothing shown as we did not insert data into the table
+select * from list;                                # Error: table does not exist
+
+-----------------------------------------------------------------------------------------------------------------------
+<<<<SELECT column FROM TABLE WHERE column= value query test>>>>
+select id,name from student where id=1;             # show rows that match the given filter
+select id,name from student where name='amy';       # show rows that match the given filter
+select id,name from list where id=1;                # Error: table "list" not exist
+select id,age from student where age=1;             # Error: column "age" is not in the table
+select id,name from student where id=20;            # Error: value is not in the table
+
+
+-----------------------------------------------------------------------------------------------------------------------
+<<<<DROP TABLE & SHOW TABLES query test>>>>
+drop table people;                                  # table "people" is dropped
+drop table list;                                    # table "list" does not exist
+
+#use SHOW TABLE to test if the table "people" is dropped
+show tables;                                        # only "student" show
+
+drop table student;                                 # table "people" is dropped
+
+#use SHOW TABLE to test if the table "people" is dropped
+show tables;                                        # Error: no table exist
+
+
+
+
+
+
